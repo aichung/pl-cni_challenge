@@ -16,12 +16,19 @@ sys.path.append(os.path.dirname(__file__))
 
 # import the Chris app superclass
 from chrisapp.base import ChrisApp
-
+# Import a python function that performs a matrix rotation
+from example_python_lib.rotate import rotate_matrix
 
 Gstr_title = """
 
-Generate a title from 
-http://patorjk.com/software/taag/#p=display&f=Doom&t=cni_challenge
+            _  _____  _____  __   _____      _           _ _                       
+           (_)/ __  \|  _  |/  | |  _  |    | |         | | |                      
+  ___ _ __  _ `' / /'| |/' |`| | | |_| | ___| |__   __ _| | | ___ _ __   __ _  ___ 
+ / __| '_ \| |  / /  |  /| | | | \____ |/ __| '_ \ / _` | | |/ _ \ '_ \ / _` |/ _ \\
+| (__| | | | |./ /___\ |_/ /_| |_.___/ / (__| | | | (_| | | |  __/ | | | (_| |  __/
+ \___|_| |_|_|\_____/ \___/ \___/\____/ \___|_| |_|\__,_|_|_|\___|_| |_|\__, |\___|
+                                    ______                               __/ |     
+                                   |______|                             |___/      
 
 """
 
@@ -132,12 +139,34 @@ class Cni_challenge(ChrisApp):
         Use self.add_argument to specify a new app argument.
         """
 
+        # To pass in a text file
+        self.add_argument('--rot', dest='rot', type=str, optional=False,
+                          help='File containing rotation matrix')
+
     def run(self, options):
         """
         Define the code to be run by this plugin app.
         """
         print(Gstr_title)
         print('Version: %s' % self.get_version())
+
+
+
+        # ====== Calling a python function to apply a rotation matrix to a list of vectors, and output to file
+        #
+        # N.B. All input and output files must be in 'inputdir' and 'outputdir', respectively.
+        # ====================================================================================================
+        input_data_name = 'vectors.txt'                                     # Text file of vectors
+        output_classification_name = 'classification.txt'                   # Output text file of rotated vectors
+
+        str_rotation_matrix = '%s/%s' % (options.inputdir, options.rot)      # File containing rotation matrices
+        str_vectors = '%s/%s' % (options.inputdir, input_data_name)
+        out_str= '%s/%s' % (options.outputdir, output_classification_name)
+
+        # Call python module
+        rotate_matrix(str_rotation_matrix, str_vectors, out_str)
+
+
 
     def show_man_page(self):
         """
