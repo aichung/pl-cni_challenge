@@ -179,3 +179,4 @@ class Cni_challenge(ChrisApp):
 if __name__ == "__main__":
     chris_app = Cni_challenge()
     chris_app.launch()
+    print os.getcwd()
