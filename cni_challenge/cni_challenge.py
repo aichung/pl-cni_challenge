@@ -105,7 +105,7 @@ class Cni_challenge(ChrisApp):
     EXECSHELL               = 'python3'
     TITLE                   = 'A ChRIS plugin for CNI 2019 Challenge'
     CATEGORY                = ''
-    TYPE                    = 'fs'
+    TYPE                    = 'ds'
     DESCRIPTION             = 'An app to ...'
     DOCUMENTATION           = 'http://wiki'
     VERSION                 = '0.1'
@@ -179,4 +179,4 @@ class Cni_challenge(ChrisApp):
 if __name__ == "__main__":
     chris_app = Cni_challenge()
     chris_app.launch()
-    print os.getcwd()
+
