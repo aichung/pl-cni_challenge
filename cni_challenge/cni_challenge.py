@@ -17,7 +17,7 @@ sys.path.append(os.path.dirname(__file__))
 # import the Chris app superclass
 from chrisapp.base import ChrisApp
 # Import a python function that performs a matrix rotation
-from example_python_lib.rotate import rotate_matrix
+from example_python.rotate import rotate_matrix
 
 Gstr_title = """
 
@@ -34,12 +34,6 @@ Gstr_title = """
 
 Gstr_synopsis = """
 
-(Edit this in-line help for app specifics. At a minimum, the 
-flags below are supported -- in the case of DS apps, both
-positional arguments <inputDir> and <outputDir>; for FS apps
-only <outputDir> -- and similarly for <in> <out> directories
-where necessary.)
-
     NAME
 
        cni_challenge.py 
@@ -55,21 +49,45 @@ where necessary.)
             [-v <level>] [--verbosity <level>]                          \\
             [--version]                                                 \\
             <inputDir>                                                  \\
-            <outputDir> 
+            <outputDir>                                                 \\
+            [--rot <matrix_file.txt>]                                   \\
 
     BRIEF EXAMPLE
 
-        * Bare bones execution
+        * Bare bones execution of a python example to read in a vector file, perform a matrix rotation, and output the
+          new vectors in a text file.
 
-            mkdir in out && chmod 777 out
-            python cni_challenge.py   \\
-                                in    out
+            mkdir inputdir outputdir && chmod 777 outputdir
+            python cni_challenge.py inputdir outputdir  --run_option python --rot rotation_matrices.txt
+
+            N.B. Required files (rot_matrix.txt and vectors.txt) should be in 'inputdir' as provided in cni_challenge 
+            github repository.
+
+            Output will be outputdir/classification.txt.
 
     DESCRIPTION
 
-        `cni_challenge.py` ...
+        `cni_challenge.py` has been created for MICCAI CNI 2019 Challenge
+        http://www.brainconnectivity.net.
+        
+        Solutions should be incorporated into this package and a container created through Docker.
+        Submission to the Challenge will be a link to the Docker container.
+        
+        `cni_challenge.py` contains currently contains a running python example.
 
     ARGS
+
+        <inputDir> 
+        Mandatory. A directory which contains all necessary input files.
+        
+        <outputDir>
+        Mandatory. A directory where output will be saved to. Must be universally writable to.
+        
+        [--run_option < python || C >]
+        Mandatory for bare bones example. C example still to come!
+        
+        [--rot <matrix_file.txt>]
+        Mandatory for bare bones example. String of file containing rotation matrices.
 
         [-h] [--help]
         If specified, show help message and exit.
@@ -97,16 +115,18 @@ where necessary.)
 
 class Cni_challenge(ChrisApp):
     """
-    An app to ....
+    A bare bones app created for MICCAI CNI 2019 Challenge.
+    Challengers are to use this app to create a Docker container of their solution in order to submit it.
     """
     AUTHORS                 = 'AWC (aiwern.chung@childrens.harvard.edu)'
     SELFPATH                = os.path.dirname(os.path.abspath(__file__))
     SELFEXEC                = os.path.basename(__file__)
     EXECSHELL               = 'python3'
-    TITLE                   = 'A ChRIS plugin for CNI 2019 Challenge'
+    TITLE                   = 'A ChRIS plugin for the CNI 2019 Challenge'
     CATEGORY                = ''
     TYPE                    = 'ds'
-    DESCRIPTION             = 'An app to ...'
+    DESCRIPTION             = 'An app for contestants to create a Docker container of a solution to the CNI 2019 Challenge.\n' \
+                              'For help see: http://www.brainconnectivity.net/challenge_subm.html'
     DOCUMENTATION           = 'http://wiki'
     VERSION                 = '0.1'
     ICON                    = '' # url of an icon image
@@ -133,40 +153,65 @@ class Cni_challenge(ChrisApp):
     # output directory.
     OUTPUT_META_DICT = {}
 
+
     def define_parameters(self):
         """
         Define the CLI arguments accepted by this plugin app.
         Use self.add_argument to specify a new app argument.
         """
 
-        # To pass in a text file
+        # To pass in a string
         self.add_argument('--rot', dest='rot', type=str, optional=False,
-                          help='File containing rotation matrix')
+                          help='Type string: Name of file containing rotation matrix')
+
+        self.add_argument('--run_option', dest='run_option', type=str, optional=False,
+                      help='Type string: Define which code to run: python || C')
+
 
     def run(self, options):
         """
         Define the code to be run by this plugin app.
         """
+
         print(Gstr_title)
         print('Version: %s' % self.get_version())
 
-
-
-        # ====== Calling a python function to apply a rotation matrix to a list of vectors, and output to file
-        #
-        # N.B. All input and output files must be in 'inputdir' and 'outputdir', respectively.
-        # ====================================================================================================
+        # ===============================================
+        # Initialising variables
+        # ===============================================
         input_data_name = 'vectors.txt'                                     # Text file of vectors
         output_classification_name = 'classification.txt'                   # Output text file of rotated vectors
 
-        str_rotation_matrix = '%s/%s' % (options.inputdir, options.rot)      # File containing rotation matrices
+        # Input and output files must be in 'inputdir' and 'outputdir', respectively.
+        str_rotation_matrix = '%s/%s' % (options.inputdir, options.rot)     # File containing rotation matrices
         str_vectors = '%s/%s' % (options.inputdir, input_data_name)
         out_str= '%s/%s' % (options.outputdir, output_classification_name)
 
-        # Call python module
-        rotate_matrix(str_rotation_matrix, str_vectors, out_str)
+        # ===============================================
+        # Call code
+        # ===============================================
+        if (options.run_option == 'python'):
 
+            # Call python module
+            print("\n")
+            print("\tCalling python code to perform vector rotations...")
+            rotate_matrix(str_rotation_matrix, str_vectors, out_str)
+            print ("\tOutput will be in %s" % out_str)
+            print("====================================================================================")
 
+        elif (options.run_option == 'C'):
+
+            # Call C example
+            print("\n")
+            print("\tC example to come....\n")
+            print("====================================================================================")
+        else:
+
+            print("\n")
+            sys.stderr.write('\tUnrecognised --run_option encountered. Note input is case-sensitive\n')
+            print("====================================================================================")
+            print(Gstr_synopsis)
+            sys.exit()
 
     def show_man_page(self):
         """
