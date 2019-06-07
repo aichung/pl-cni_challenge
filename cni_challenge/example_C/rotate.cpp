@@ -1,6 +1,4 @@
 #include <iostream>
-#include <fstream>
-#include <string>
 #include <cmath>
 
 using namespace std;
@@ -18,20 +16,6 @@ float outputMatrix[4][1] = {0.0, 0.0, 0.0, 0.0};
 
 void showPoint(){
     cout<<"("<<outputMatrix[0][0]<<","<<outputMatrix[1][0]<<","<<outputMatrix[2][0]<<")"<<endl;
-}
-
-void read_file(const char* input_vector_file, const char* input_rotation_file)
-{
-
-    string line;
-    ifstream myfile (input_vector_file;
-    if (myfile.is_open()) {
-        while ( getline (myfile,line) ) {
-            cout << line << '\n';
-        }
-        myfile.close();
-    }
-
 }
 
 void multiplyMatrix()
