@@ -164,7 +164,7 @@ Thus, getting inline help is:
 
 
 App and Challenge Requirements, Rules
-------------------------------
+-------------------------------------
 
 * Python packages that are required should be listed in ``requirements.txt`` which will be pip installed and included in the Docker container.
 * For implementations in C or C++, the executable needs to be created in first such that make instructions should be included in ``Dockerfile`` (an example of this is to come).
@@ -174,6 +174,7 @@ These requirements are to help us systematically execute and assess Challenge so
 * Output should be a text file in ``outputdir`` called ``classification.txt``. ``classification.txt`` should contain the classification label for each subject with one subject per row (a single column of values). Labels should be 0 = Control, and 1 = Patient.
 
 Rules:
+~~~~~~
 * To be considered for a prize, at least one author of a Challenge submission must be registered to attend the CNI Chellenge or Workshop at MICCAI 2019.
 
 
