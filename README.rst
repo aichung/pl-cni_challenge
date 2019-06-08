@@ -18,18 +18,22 @@ Abstract
 
 This app was created for submissions to the MICCAI CNI 2019 Challenge: http://www.brainconnectivity.net/challenge.html
 
-Submissions are accepted as containerised Docker images. This allows you to be able to submit your solution in any open-source language and version. And it enables us to easily run your solution without having to install multiple programs required for execution.
+Submissions are accepted as containerised Docker images. This allows you to submit your Challenge solution in your choice of open-source language and version. And it enables us to easily run your solution without having to install multiple programs required for execution.
 
-The ``cni_challenge.py`` app is a wrapper for you to add your code/package which is then be containerised by Docker.
+The ``cni_challenge.py`` app is a wrapper for you to add your code/package which is then containerised by Docker.
 While this is coded in Python and currently contains a bare bones example also in Python, other languages are possible.
 
-NB: This current repo does not have a working demonstration in C yet.
+NB: This current repo does not have a working demonstration in C yet. More to come on that.
 
 ``cni_challenge.py`` is a ChRIS-based application: https://github.com/FNNDSC/CHRIS_docs
+For further information on the pre-requisites and Challange rules/requirements: http://miccai.brainconnectivity.net/challenge_subm.html
+For more information on the original ChRIS-app: https://github.com/FNNDSC/cookiecutter-chrisapp
 
 
 Synopsis
 --------
+
+This bare bones example demonstrates a python program which performs a rotation on a list of vectors. It will demonstrate how to pass in string inputs, read in and output to respective, mandatory directories, and how to incorporate python code and packages for the app to retrieve and for Docker to containerize.
 
 .. code::
 
@@ -43,14 +47,14 @@ Synopsis
         [--run_option < python || C >]                              \
         [--rot <matrix_file.txt>]                                   \
 
-Requirements and Quick Setup
+Installation Requirements and Quick Setup
 ----------------------------
 
-1. Install ``Python`` (3.6.7+) and ``pip`` (which is usually installed with Python)
+1. Install ``Python`` (3.5+) and ``pip`` (which is usually installed with Python)
 2. Create a GitHub account on https://github.com/ if you don't already have one, and install on machine.
 3. Create a Docker account on https://hub.docker.com/ if you don't already have one.
 4. Install latest ``Docker`` (17.04.0+) if you want to test your plugin's docker image and containers on your local machine. 
-      To install on ubuntu 18.04:      
+   To install on ubuntu 18.04:      
       
 .. code:: bash
 
@@ -63,7 +67,7 @@ Otherwise, visit https://docs.docker.com/install/ for installation directions
 6. Log onto your Docker Hub account and create a new repository with automated build.
    In 'Account Settings' -> 'Linked Accounts', connect your GitHub account to Docker.
 
-   Then back in your DockerHub home, click the ``Create Repository +``  button. The website page will walk you through setting up the automated build. When prompted for the GitHub repository that you’d like to use for the automated build select the pl-cni_challenge repository that you just forked/cloned. Make the Docker repository Public.
+   Then back in your DockerHub home, click the ``Create Repository +``  button. The website page will walk you through setting up the automated build. When prompted for the GitHub repository that you’d like to use for the automated build select the pl-cni_challenge repository that you just forked/cloned. Name the Docker repository ${cni_challenge_DockerRepo} and make it Public.
 
    **It is extremely important that you tag your automatically built docker image with an appropriate version number based on your GitHub tags**.
    Create a new build rule by clicking the ``BUILD RULES +``  button. A good rule good be **Source type:** ``Tag``,
@@ -72,6 +76,7 @@ Otherwise, visit https://docs.docker.com/install/ for installation directions
    Click ``Create && Build``  button to finish the setup and trigger the automated build.
    For more information on Automated Builds, please visit https://docs.docker.com/docker-hub/builds/. 
 
+   After ths build has completed, the ``cni_challenge`` bare bones example is now available as a Docker image to be pulled from your DockerHub. The link to it will be ${your_Docker_account name}/${cni_challenge_DockerRepo}.
 
 Arguments
 ---------
@@ -82,9 +87,9 @@ Arguments
     Mandatory. A directory which contains all necessary input files.
         
     <outputDir>
-    Mandatory. A directory where output will be saved to. Must be universally writable to.
+    Mandatory. A directory where output will be saved. Must be universally writable to.
         
-    [--run_option < python || C >]
+    [--run_option < python || C >
     Mandatory for bare bones example. C example still to come!
         
     [--rot <matrix_file.txt>]
@@ -125,27 +130,51 @@ to get inline help.
 Using ``docker run``
 ~~~~~~~~~~~~~~~~~~~~
 
-To run using ``docker``, be sure to assign an "input" directory to ``/incoming`` and an output directory to ``/outgoing``. *Make sure that the* ``$(pwd)/out`` *directory is world writable!*
+Pull the latest ``cni_challenge`` image to your local machine:
+
+.. code:: bash
+
+    docker pull ${your_Docker_account name}/${cni_challenge_DockerRepo}
+
+To run using ``docker``, be sure to assign the input directory to ``/incoming`` and the output directory to ``/outgoing``. *Make sure that the* ``$(pwd)/outputdir`` *directory is world writable!*. These directories must be named ``inputdir`` and ``outputdir``. 
+For the bare bones example, copy the expected input files ( ``rotation_matrices.txt`` and  ``vectors.txt``) from the GitHub repo.
+
+.. code:: bash
+
+    mkdir inputdir outputdir && chmod 777 outputdir
+    cp ${cni_challenge_github_repo}/inputdir/* $(pwd)/inputdir
 
 Now, prefix all calls with 
 
 .. code:: bash
 
-    docker run --rm -v $(pwd)/inining (pwd)/out:/outgoing pl-cni_challenge cni_challenge.py
+    CHECK MY TERMINAL AND UPDATE BELOW
+    docker run --rm -v $(pwd)/inputdir:/incoming (pwd)/outputdir:/outgoing pl-cni_challenge cni_challenge.py
+
+The output file of rotated vectors,  ``classifications.txt``, will be in  ``outputdir``.
 
 Thus, getting inline help is:
 
 .. code:: bash
 
-    mkdir in out && chmod 777 out
-    docker run --rm -v $(pwd)/in:/incoming -v $(pwd)/out:/outgoing      \
-            pl-cni_challenge cni_challenge.py                        \
-            --man                                                       \
+    docker run --rm -v $(pwd)/inputdir:/incoming -v $(pwd)/outputdir:/outgoing      \
+            pl-cni_challenge cni_challenge.py                                       \
+            --man                                                                   \
             /incoming /outgoing
 
-Examples
---------
 
+App and Challenge Requirements, Rules
+------------------------------
+
+* Python packages that are required should be listed in ``requirements.txt`` which will be pip installed and included in the Docker container.
+* For implementations in C or C++, the executable needs to be created in first such that make instructions should be included in ``Dockerfile`` (an example of this is to come).
+
+These requirements are to help us systematically execute and assess Challenge solutions:
+* Input and output directories are named ``inputdir`` and ``outputdir``, respectively. Your code should expect to read in data from ``inputdir`` as is structured in the pl-cni_challenge repo as this is how our test data will be structured.
+* Output should be a text file in ``outputdir`` called ``classification.txt``. ``classification.txt`` should contain the classification label for each subject with one subject per row (a single column of values). Labels should be 0 = Control, and 1 = Patient.
+
+Rules:
+* To be considered for a prize, at least one author of a Challenge submission must be registered to attend the CNI Chellenge or Workshop at MICCAI 2019.
 
 
 
