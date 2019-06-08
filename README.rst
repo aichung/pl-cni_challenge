@@ -54,7 +54,7 @@ Installation Requirements and Quick Setup
 2. Create a GitHub account on https://github.com/ if you don't already have one, and install on machine.
 3. Create a Docker account on https://hub.docker.com/ if you don't already have one.
 4. Install latest ``Docker`` (17.04.0+) if you want to test your plugin's docker image and containers on your local machine. 
-   To install on ubuntu 18.04:      
+   To install on Ubuntu 18.04:      
       
 .. code:: bash
 
@@ -113,7 +113,7 @@ Run
 
 This ``plugin`` can be run in two modes: natively as a python package or as a containerised Docker image.
 
-Run locally:
+Run locally
 ~~~~~~~~~~~~
 
 .. code:: bash
@@ -137,7 +137,7 @@ Pull the latest ``cni_challenge`` image to your local machine:
     docker pull ${your_Docker_account name}/${cni_challenge_DockerRepo}
 
 To run using ``docker``, be sure to assign the input directory to ``/incoming`` and the output directory to ``/outgoing``. *Make sure that the* ``$(pwd)/outputdir`` *directory is world writable!*. These directories must be named ``inputdir`` and ``outputdir``. 
-For the bare bones example, copy the expected input files ( ``rotation_matrices.txt`` and  ``vectors.txt``) from the GitHub repo.
+For the bare bones example, copy the expected input files (``rotation_matrices.txt`` and  ``vectors.txt``) from the GitHub repo.
 
 .. code:: bash
 
@@ -149,7 +149,7 @@ Now, prefix all calls with
 .. code:: bash
 
     CHECK MY TERMINAL AND UPDATE BELOW
-    docker run --rm -v $(pwd)/inputdir:/incoming (pwd)/outputdir:/outgoing pl-cni_challenge cni_challenge.py
+    docker run --rm -v $(pwd)/inputdir:/incoming $(pwd)/outputdir:/outgoing pl-cni_challenge cni_challenge.py
 
 The output file of rotated vectors,  ``classifications.txt``, will be in  ``outputdir``.
 
@@ -171,7 +171,7 @@ App and Challenge Requirements, Rules
 
 These requirements are to help us systematically execute and assess Challenge solutions:
 
-* Input and output directories are named ``inputdir`` and ``outputdir``, respectively. Your code should expect to read in data from ``inputdir`` as is structured in the pl-cni_challenge repo as this is how our test data will be structured.
+* Input and output directories are named ``inputdir`` and ``outputdir``, respectively. Your code should expect to read in data from ``inputdir`` as is structured in the ``pl-cni_challenge`` repo as this is how our test data will be structured.
 * Output should be a text file in ``outputdir`` called ``classification.txt``. ``classification.txt`` should contain the classification label for each subject with one subject per row (a single column of values). Labels should be 0 = Control, and 1 = Patient. For information on our performance evaluation criterias, see: http://miccai.brainconnectivity.net/challenge_eval.html
 
 Rules
