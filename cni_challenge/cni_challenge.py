@@ -60,7 +60,7 @@ Gstr_synopsis = """
             mkdir inputdir outputdir && chmod 777 outputdir
             python cni_challenge.py inputdir outputdir  --run_option python --rot rotation_matrices.txt
 
-            N.B. Required files (rot_matrix.txt and vectors.txt) should be in 'inputdir' as provided in cni_challenge 
+            N.B. Required files (rotation_matrices.txt and vectors.txt) should be in 'inputdir' as provided in cni_challenge 
             github repository.
 
             Output will be outputdir/classification.txt.
