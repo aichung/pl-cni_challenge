@@ -26,7 +26,9 @@ While this is coded in Python and currently contains a bare bones example also i
 NB: This current repo does not have a working demonstration in C yet. More to come on that.
 
 ``cni_challenge.py`` is a ChRIS-based application: https://github.com/FNNDSC/CHRIS_docs
+
 For further information on the pre-requisites and Challange rules/requirements: http://miccai.brainconnectivity.net/challenge_subm.html
+
 For more information on the original ChRIS-app: https://github.com/FNNDSC/cookiecutter-chrisapp
 
 
