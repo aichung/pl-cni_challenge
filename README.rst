@@ -170,10 +170,11 @@ App and Challenge Requirements, Rules
 * For implementations in C or C++, the executable needs to be created in first such that make instructions should be included in ``Dockerfile`` (an example of this is to come).
 
 These requirements are to help us systematically execute and assess Challenge solutions:
+
 * Input and output directories are named ``inputdir`` and ``outputdir``, respectively. Your code should expect to read in data from ``inputdir`` as is structured in the pl-cni_challenge repo as this is how our test data will be structured.
 * Output should be a text file in ``outputdir`` called ``classification.txt``. ``classification.txt`` should contain the classification label for each subject with one subject per row (a single column of values). Labels should be 0 = Control, and 1 = Patient.
 
-Rules:
+Rules
 ~~~~~~
 * To be considered for a prize, at least one author of a Challenge submission must be registered to attend the CNI Chellenge or Workshop at MICCAI 2019.
 
