@@ -124,7 +124,7 @@ to get inline help.
 
 .. code:: bash
 
-    cni_challenge.py /some/inputdir /destination/to/outputdir --run_option python --rot rotation_matrices.txt
+    cni_challenge.py /destination/to/inputdir /destination/to/outputdir --run_option python --rot rotation_matrices.txt
 
 
 Using ``docker run``
@@ -148,8 +148,7 @@ Now, prefix all calls with
 
 .. code:: bash
 
-    CHECK MY TERMINAL AND UPDATE BELOW
-    docker run --rm -v $(pwd)/inputdir:/incoming $(pwd)/outputdir:/outgoing pl-cni_challenge cni_challenge.py
+    sudo docker run --rm -v $(pwd)/inputdir:/incoming -v $(pwd)/outputdir:/outgoing ${your_Docker_account name}/${cni_challenge_DockerRepo} cni_challenge.py /incoming /outgoing --rot rotation_matrix.txt
 
 The output file of rotated vectors,  ``classifications.txt``, will be in  ``outputdir``.
 
@@ -157,10 +156,10 @@ Thus, getting inline help is:
 
 .. code:: bash
 
-    docker run --rm -v $(pwd)/inputdir:/incoming -v $(pwd)/outputdir:/outgoing      \
-            pl-cni_challenge cni_challenge.py                                       \
-            --man                                                                   \
-            /incoming /outgoing
+    sudo docker run --rm -v $(pwd)/inputdir:/incoming -v $(pwd)/outputdir:/outgoing      \
+                 pl-cni_challenge cni_challenge.py                                       \
+                 --man                                                                   \
+                 /incoming /outgoing
 
 
 App and Challenge Requirements, Rules
