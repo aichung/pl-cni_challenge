@@ -1,0 +1,16 @@
+Sensitivity,1.0
+Specificity,0.0
+Precision,0.5
+Negative_predictive_value,nan
+False_negative_rate,0.0
+False_positive_rate,1.0
+False_discovery_rate,0.5
+False_omission_rate,nan
+Accuracy,0.5
+F1_score,0.6666666666666666
+Geom_mean,0.7071067811865476
+Matthews_CC,nan
+Informedness,0.0
+Markedness,nan
+Optimized_precision,-0.5
+AUC,0.5
