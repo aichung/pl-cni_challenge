@@ -1,6 +1,6 @@
 #!/usr/bin/env python                                            
 #
-# cni_challenge fs ChRIS plugin app
+# cni_challenge ds ChRIS plugin app
 #
 # (c) 2016-2019 Fetal-Neonatal Neuroimaging & Developmental Science Center
 #                   Boston Children's Hospital
