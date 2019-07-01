@@ -175,7 +175,7 @@ These requirements are to help us systematically execute and assess Challenge so
 
 Rules
 ~~~~~~
-* To be considered for a prize, at least one author of a Challenge submission must be registered to attend the CNI Chellenge or Workshop at MICCAI 2019.
+* To be considered for a prize, at least one author of a Challenge submission must register for the CNI Challenge or Workshop at MICCAI 2019.
 
 
 
