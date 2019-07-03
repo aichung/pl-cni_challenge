@@ -130,14 +130,14 @@ to get inline help. And the following to run the bare-bones example:
 Using ``docker run``
 ~~~~~~~~~~~~~~~~~~~~
 
-Pull the latest ``cni_challenge`` image to your local machine:
+Pull the latest ``cni_challenge`` image to your machine:
 
 .. code:: bash
 
     docker pull ${your_Docker_account name}/${cni_challenge_DockerRepo}
 
-To run using ``docker``, be sure to assign the input directory to ``/incoming`` and the output directory to ``/outgoing``. *Make sure that the* ``$(pwd)/outputdir`` *directory is world writable!*. These directories must be named ``inputdir`` and ``outputdir``. 
-For the bare bones example, copy the expected input files (``rotation_matrices.txt`` and  ``vectors.txt``) from the GitHub repo.
+To run using ``docker``, be sure to assign the input directory to ``/incoming`` and the output directory to ``/outgoing``. *Make sure that the* ``$(pwd)/outputdir`` *directory is world writable!* These directories must be named ``inputdir`` and ``outputdir``. 
+For the bare bones example, copy the expected input files (``rotation_matrices.txt`` and  ``vectors.txt``) from the GitHub repo and place it in ``inputdir``.
 
 .. code:: bash
 
@@ -148,7 +148,7 @@ Now, prefix all calls with
 
 .. code:: bash
 
-    sudo docker run --rm -v $(pwd)/inputdir:/incoming -v $(pwd)/outputdir:/outgoing ${your_Docker_account name}/${cni_challenge_DockerRepo} cni_challenge.py /incoming /outgoing --rot rotation_matrix.txt
+    sudo docker run --rm -v $(pwd)/inputdir:/incoming -v $(pwd)/outputdir:/outgoing ${your_Docker_account name}/${cni_challenge_DockerRepo} cni_challenge.py  --run_option python --rot rotation_matrix.txt /incoming /outgoing
 
 The output file of rotated vectors,  ``classifications.txt``, will be in  ``outputdir``.
 
@@ -166,7 +166,7 @@ App and Challenge Requirements, Rules
 -------------------------------------
 
 * Python packages that are required should be listed in ``requirements.txt`` which will be pip installed and included in the Docker container.
-* For implementations in C or C++, the executable needs to be created in first such that make instructions should be included in ``Dockerfile`` (an example of this is to come).
+* For implementations in C or C++, the executable pl-cni_challenge wrapper will create the executable before being passed into DockerHub. This means that make instructions (``makefile``) should be included in ``Dockerfile`` (an example of this is to come).
 
 These requirements are to help us systematically execute and assess Challenge solutions:
 
