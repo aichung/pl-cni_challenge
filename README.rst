@@ -33,7 +33,7 @@ For further information on the pre-requisites and Challange rules/requirements: 
 Synopsis
 --------
 
-This bare bones example demonstrates a python program which performs a rotation on a list of vectors. It will demonstrate how to pass in string inputs, read in and output to respective, mandatory directories, and how to incorporate python code and packages for the app to retrieve and for Docker to containerize.
+This bare bones example demonstrates a python program which performs a rotation on a list of vectors. It will demonstrate how to pass in string inputs, read in and output to respective, mandatory directories, and how to incorporate python code and packages for the app to retrieve and for DockerHub to containerize.
 
 .. code::
 
@@ -52,7 +52,7 @@ Installation Requirements and Quick Setup
 
 1. Install ``Python`` (3.5+) and ``pip`` (which is usually installed with Python)
 2. Create a GitHub account on https://github.com/ if you don't already have one, and install on machine.
-3. Create a Docker account on https://hub.docker.com/ if you don't already have one.
+3. Create a DockerHub account on https://hub.docker.com/ if you don't already have one.
 4. Install latest ``Docker`` (17.04.0+) if you want to test your plugin's docker image and containers on your local machine. 
    To install on Ubuntu 18.04:      
       
@@ -63,9 +63,9 @@ Installation Requirements and Quick Setup
     
 Otherwise, visit https://docs.docker.com/install/ for installation directions
 
-5. Fork or clone this pl-cni_challenge repository to your GitHub.
-6. Log onto your Docker Hub account and create a new repository with automated build.
-   In 'Account Settings' -> 'Linked Accounts', connect your GitHub account to Docker.
+5. Fork this pl-cni_challenge repository to your GitHub.
+6. Log onto your DockerHub account and create a new repository with automated build.
+   In 'Account Settings' -> 'Linked Accounts', connect your GitHub account to DockerHub.
 
    Then back in your DockerHub home, click the ``Create Repository +``  button. The website page will walk you through setting up the automated build. When prompted for the GitHub repository that you’d like to use for the automated build select the pl-cni_challenge repository that you just forked/cloned. Name the Docker repository ${cni_challenge_DockerRepo} and make it Public.
 
@@ -120,11 +120,11 @@ Run locally
 
     cni_challenge.py --man
 
-to get inline help.
+to get inline help. And the following to run the bare-bones example:
 
 .. code:: bash
 
-    cni_challenge.py /destination/to/inputdir /destination/to/outputdir --run_option python --rot rotation_matrices.txt
+    cni_challenge.py --run_option python --rot rotation_matrices.txt /destination/to/inputdir /destination/to/outputdir
 
 
 Using ``docker run``
@@ -175,7 +175,7 @@ These requirements are to help us systematically execute and assess Challenge so
 
 Rules
 ~~~~~~
-* To be considered for a prize, at least one author of a Challenge submission must register for the CNI Challenge or Workshop at MICCAI 2019.
+* To be considered for a prize, at least one author of a Challenge submission must register for the CNI Challenge at MICCAI 2019.
 
 
 
