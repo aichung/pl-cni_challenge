@@ -170,8 +170,23 @@ App and Challenge Requirements, Rules
 
 These requirements are to help us systematically execute and assess Challenge solutions:
 
+* We expect to be able to run your Docker image on the test data with the following command:
+
+.. code:: bash
+
+    sudo docker run --rm -v $(pwd)/inputdir:/incoming -v $(pwd)/outputdir:/outgoing ${your_Docker_account name}/${cni_challenge_DockerRepo} cni_challenge.py /incoming /outgoing
+
+So please remove the mandatory arguments/assignments that were included as examples in the barebones repo to help you (``--rot`` and ``--run_option``)
+
 * Input and output directories are named ``inputdir`` and ``outputdir``, respectively. Your code should expect to read in data from ``inputdir`` as is structured in the ``pl-cni_challenge`` repo as this is how our test data will be structured.
-* Output should be a text file in ``outputdir`` called ``classification.txt``. ``classification.txt`` should contain the classification label for each subject with one subject per row (a single column of values). Labels should be 0 = Control, and 1 = Patient. For information on our performance evaluation criterias, see: http://miccai.brainconnectivity.net/challenge_eval.html
+* Output should be a text file in ``outputdir`` called ``classification.txt``. ``classification.txt`` should contain the classification label for each subject with one subject per row (a single column of values). Labels should be 0 = Control, and 1 = Patient. 
+* The code to evaluate the performance of your submission is pl-cni_challenge/cni_challenge/evaluation/classification_metrics.py, which will be executed as: 
+
+.. code:: bash
+
+    classification_metrics.py -p classification.txt -g ${goundtruth_file} -o ${output_file}
+
+For information on our performance evaluation criterias, see: http://miccai.brainconnectivity.net/challenge_eval.html
 
 Rules
 ~~~~~~
