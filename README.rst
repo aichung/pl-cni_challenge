@@ -152,12 +152,13 @@ Now, prefix all calls with
 
 The output file of rotated vectors,  ``classifications.txt``, will be in  ``outputdir``.
 
-Thus, getting inline help is:
+Our barebones Docker image can be retrieved (from DockerHug 'aiwc') and executed (calling 'man') on your machine as follows (with directories 'inputdir' and 'outputdir' as specified above):
 
 .. code:: bash
 
+    docker pull aiwc/pl-cni_challenge
     sudo docker run --rm -v $(pwd)/inputdir:/incoming -v $(pwd)/outputdir:/outgoing      \
-                 pl-cni_challenge cni_challenge.py                                       \
+                 aiwc/pl-cni_challenge cni_challenge.py                                  \
                  --man                                                                   \
                  /incoming /outgoing
 
