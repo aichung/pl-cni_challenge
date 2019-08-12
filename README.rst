@@ -150,7 +150,7 @@ Now, prefix all calls with
 
 .. code:: bash
 
-    sudo docker run --rm -v $(pwd)/inputdir:/incoming -v $(pwd)/outputdir:/outgoing ${your_Docker_account name}/${cni_challenge_DockerRepo} cni_challenge.py  --run_option python --rot rotation_matrix.txt /incoming /outgoing
+    sudo docker run --rm -v $(pwd)/inputdir:/incoming -v $(pwd)/outputdir:/outgoing ${your_Docker_account name}/${cni_challenge_DockerRepo} cni_challenge.py  --run_option python --rot rotation_matrices.txt /incoming /outgoing
 
 The output file of rotated vectors,  ``classifications.txt``, will be in  ``outputdir``.
 
