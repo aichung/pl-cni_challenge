@@ -183,6 +183,7 @@ So please remove the mandatory arguments/assignments that were included as examp
 
 * Input and output directories are named ``inputdir`` and ``outputdir``, respectively. Your code should expect to read in data from ``inputdir`` as is structured in the ``pl-cni_challenge`` repo as this is how our test data will be structured.
 * Output should be _two_ text files in ``outputdir`` called ``classification.txt`` and ``scores.txt``. ``classification.txt`` should contain the classification label for each subject with one subject per row (a single column of values). Labels should be 0 = Control, and 1 = Patient. ``scores.txt`` should contain the prediction probability/score for each subject, also with one subject per row.
+* Do not include the Challenge training or validation data in your Docker image.
 * The code to evaluate the performance of your submission is pl-cni_challenge/cni_challenge/evaluation/classification_metrics.py, which will be executed as: 
 
 .. code:: bash
