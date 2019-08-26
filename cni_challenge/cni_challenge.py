@@ -63,7 +63,7 @@ Gstr_synopsis = """
             N.B. Required files (rotation_matrices.txt and vectors.txt) should be in 'inputdir' as provided in cni_challenge 
             github repository.
 
-            Output will be outputdir/classification.txt.
+            Output will be outputdir/classification.txt and outputdir/scores.txt.
 
     DESCRIPTION
 
@@ -181,11 +181,15 @@ class Cni_challenge(ChrisApp):
         # ===============================================
         input_data_name = 'vectors.txt'                                     # Text file of vectors
         output_classification_name = 'classification.txt'                   # Output text file of rotated vectors
+        output_scores_name = 'scores.txt'                                   # Example expected output text file of Challenge 
+                                                                            # prediction/probability score
 
         # Input and output files must be in 'inputdir' and 'outputdir', respectively.
         str_rotation_matrix = '%s/%s' % (options.inputdir, options.rot)     # File containing rotation matrices
         str_vectors = '%s/%s' % (options.inputdir, input_data_name)
         out_str= '%s/%s' % (options.outputdir, output_classification_name)
+        out_str_scores= '%s/%s' % (options.outputdir, output_scores_name)   # Include this as part of your output. See 
+                                                                            # 'rotate_matrix' function call below for an example.
 
         # ===============================================
         # Call code
